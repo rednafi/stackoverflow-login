@@ -1,8 +1,16 @@
-"""Login to stack overflow.com peridically and do nothing."""
+"""Login to stack overflow.com peridically and do nothing.
+
+Before running the script, make sure you've set up your credentials in
+the environment variables.
+
+export STACKOVERFLOW_EMAIL=<your email>
+export STACKOVERFLOW_PASSWORD=<your password>
+"""
 
 
 import logging
 import os
+import time
 from http import HTTPStatus
 
 import httpx
@@ -11,12 +19,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 def login(url: str, email: str, password: str) -> None:
-    """Login to stack overflow.com. Before running the script,
-    make sure you've set up your credentials in the environment variables.
-
-    export STACKOVERFLOW_EMAIL=<your email>
-    export STACKOVERFLOW_PASSWORD=<your password>
-    """
+    """Login to stack overflow.com."""
 
     headers = {
         "Accept": (
@@ -44,13 +47,17 @@ def login(url: str, email: str, password: str) -> None:
     # Make a post request with redirect turned on.
     client = httpx.Client(headers=headers, follow_redirects=True)
     response = client.post(url, data=data, headers=headers)
+    print(response.status_code)
 
     assert client.cookies.get("prov") is not None
     assert response.status_code == HTTPStatus.OK
     assert "Human verification" not in response.text
     assert "Top Questions" in response.text
 
-    logging.warning("Login successful!")
+    logging.info("Login successful!")
+    logging.info("Now sleeping for 5 seconds...")
+
+    time.sleep(5)
 
 
 if __name__ == "__main__":
