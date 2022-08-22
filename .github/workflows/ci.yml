@@ -52,7 +52,8 @@ jobs:
           pytest -v -s
 
       - name: Login to Stackoverflow
+        env:
+          STACKOVERFLOW_EMAIL: ${{ secrets.STACKOVERFLOW_EMAIL }}
+          STACKOVERFLOW_PASSWORD: ${{ secrets.STACKOVERFLOW_PASSWORD }}
         run: |
-          STACKOVERFLOW_EMAIL=${{ secrets.STACKOVERFLOW_EMAIL }} \
-          & STACKOVERFLOW_PASSWORD=${{ secrets.STACKOVERFLOW_PASSWORD }} \
-          & python -m src.login
+          python -m src.login
