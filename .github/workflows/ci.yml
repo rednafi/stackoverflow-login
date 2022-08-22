@@ -21,7 +21,7 @@ concurrency:
 
 
 jobs:
-  build:
+  run-script:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
