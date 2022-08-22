@@ -53,6 +53,6 @@ jobs:
 
       - name: Login to Stackoverflow
         run: |
-          STACKOVERFLOW_EMAIL=${{ secrets.STACKOVERFLOW_EMAIL }}
-          STACKOVERFLOW_PASSWORD=${{ secrets.STACKOVERFLOW_PASSWORD }}
-          python -m src.login
+          STACKOVERFLOW_EMAIL=${{ secrets.STACKOVERFLOW_EMAIL }} \
+          & STACKOVERFLOW_PASSWORD=${{ secrets.STACKOVERFLOW_PASSWORD }} \
+          & python -m src.login
