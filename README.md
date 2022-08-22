@@ -1,2 +1,4 @@
 # stackoverflow-login
-Automated login to stackoverflow
+
+Automated login to stackoverflow.
+
