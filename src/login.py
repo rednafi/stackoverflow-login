@@ -47,7 +47,6 @@ def login(url: str, email: str, password: str) -> None:
     # Make a post request with redirect turned on.
     client = httpx.Client(headers=headers, follow_redirects=True)
     response = client.post(url, data=data, headers=headers)
-    print(response.status_code)
 
     assert client.cookies.get("prov") is not None
     assert response.status_code == HTTPStatus.OK
@@ -60,13 +59,27 @@ def login(url: str, email: str, password: str) -> None:
     time.sleep(5)
 
 
-if __name__ == "__main__":
+def main(retry_after: int = 10 * 600, retry_count: int = 5) -> None:
+    """Login to stack overflow.com periodically and do nothing."""
+
     url = "https://stackoverflow.com/users/login"
     email = os.environ["STACKOVERFLOW_EMAIL"]
     password = os.environ["STACKOVERFLOW_PASSWORD"]
+    error_count = 0
 
-    try:
-        login(url, email, password)
-    except AssertionError:
-        logging.error("Login failed!")
-        raise
+    while True:
+        try:
+            return login(url, email, password)
+        except AssertionError:
+            logging.error("Login failed!")
+            error_count += 1
+            logging.info("Retrying in 10 minutes...")
+            time.sleep(retry_after)
+
+            if error_count == retry_count:
+                logging.error("Too many login failures!")
+                raise
+
+
+if __name__ == "__main__":
+    main()

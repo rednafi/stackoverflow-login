@@ -70,3 +70,10 @@ def test_login_error(mock_client, mock_sleep):
 
     mock_client.assert_called_once_with(headers=headers, follow_redirects=True)
     mock_sleep.assert_not_called()
+
+
+@patch("src.login.login", autospec=True, side_effect=AssertionError)
+def test_main_retry(mock_login):
+    with pytest.raises(AssertionError):
+        login.main(retry_after=0, retry_count=5)
+    assert mock_login.call_count == 5
