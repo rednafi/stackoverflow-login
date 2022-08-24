@@ -72,6 +72,7 @@ def test_login_error(mock_client, mock_sleep):
     mock_sleep.assert_not_called()
 
 
+@patch("os.environ", {"STACKOVERFLOW_EMAIL": "", "STACKOVERFLOW_PASSWORD": ""})
 @patch("src.login.login", autospec=True, side_effect=AssertionError)
 def test_main_retry(mock_login):
     with pytest.raises(AssertionError):
