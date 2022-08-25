@@ -9,9 +9,9 @@ on:
     branches:
       - main
 
-  # Every six hours.
+  # Everyday at 00:00 UTC.
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 0 * * *"
 
 
 # Cancel any running workflow if the CI gets triggered again.
@@ -49,7 +49,10 @@ jobs:
 
       - name: Run the tests
         run: |
-          pytest -v -s
+          pytest --cov=./ --cov-report=xml
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
 
       - name: Login to Stackoverflow
         env:

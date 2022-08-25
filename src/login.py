@@ -59,7 +59,7 @@ def login(url: str, email: str, password: str) -> None:
     time.sleep(5)
 
 
-def main(retry_after: int = 10 * 600, retry_count: int = 5) -> None:
+def main(retry_after: int = 10 * 60, retry_count: int = 5) -> None:
     """Login to stack overflow.com periodically and do nothing."""
 
     url = "https://stackoverflow.com/users/login"
@@ -82,4 +82,6 @@ def main(retry_after: int = 10 * 600, retry_count: int = 5) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main() # pragma: nocover
+
+
