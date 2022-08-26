@@ -82,6 +82,4 @@ def main(retry_after: int = 10 * 60, retry_count: int = 5) -> None:
 
 
 if __name__ == "__main__":
-    main() # pragma: nocover
-
-
+    main()  # pragma: nocover
