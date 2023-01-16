@@ -8,7 +8,7 @@ attrs==22.1.0
     # via pytest
 black==22.12.0
     # via -r requirements-dev.in
-build==0.9.0
+build==0.10.0
     # via
     #   -r requirements-dev.in
     #   pip-tools
@@ -38,8 +38,6 @@ packaging==21.3
     #   pytest
 pathspec==0.9.0
     # via black
-pep517==0.13.0
-    # via build
 pip-tools==6.11.0
     # via -r requirements-dev.in
 platformdirs==2.5.2
@@ -52,6 +50,8 @@ pyflakes==2.5.0
     # via flake8
 pyparsing==3.0.9
     # via packaging
+pyproject-hooks==1.0.0
+    # via build
 pytest==7.2.0
     # via
     #   -r requirements-dev.in
