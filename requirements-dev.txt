@@ -4,7 +4,7 @@
 #
 #    pip-compile --no-emit-options --output-file=requirements-dev.txt requirements-dev.in
 #
-black==23.7.0
+black==23.9.1
     # via -r requirements-dev.in
 build==1.0.0
     # via
